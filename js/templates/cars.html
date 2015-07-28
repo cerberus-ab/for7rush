@@ -1,0 +1,23 @@
+<div id="control">
+    <div class="tabs tabs-com" id="filter_brand">
+        <a class="tab" href="#" data-filter="all">Все автомобили</a>
+        <% filters.forEach(function(currentFilter) { %>
+            <a class="tab" href="#" data-filter="<%= currentFilter.value %>"><%= currentFilter.label %></a>
+        <% }) %>
+    </div>
+    <div class="table_header"><p id="catalog_info"></p></div>
+    <div class="table_content">
+        <table>
+            <thead>
+                <tr>
+                    <td>Изображение</td>
+                    <td>Название</td>
+                    <td>Описание</td>
+                    <td>Управление</td>
+                </tr>
+            </thead>
+            <tbody id="catalog_list">
+            </tbody>
+        </table>
+    </div>
+</div>

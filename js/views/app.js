@@ -9,11 +9,15 @@ define([
         template: _.template(template),
 
         initialize: function(options) {
-            console.log(options);
+            this.childs = {};
+            this.collections = {};
+            this.collections.cars = options.cars;
         },
 
         render: function() {
             this.$el.html(this.template());
+            this.childs.cars = new CarsView({ collection: this.collections.cars });
+            this.childs.cars.render();
             return this;
         },
 

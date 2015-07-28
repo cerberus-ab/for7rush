@@ -1,19 +1,21 @@
 define([
-    "config",
     "router",
     "views/app",
-    "collections/cars"
+    "collections/cars",
+    "storage/catalog"
 
-], function(config, Router, AppView, CarsCollection) {
+], function(Router, AppView, CarsCollection, catalog) {
 
     var App = function() {
         this.router = new Router();
         this.views = {};
         this.collections = {};
 
-        this.collections.cars = new CarsCollection();
+        this.collections.cars = new CarsCollection(catalog);
 
-        this.views.app = new AppView();
+        this.views.app = new AppView({
+            cars: this.collections.cars
+        });
 
         this.views.app.render();
     };
