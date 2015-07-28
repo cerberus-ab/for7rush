@@ -21,5 +21,5 @@ requirejs.config({
 });
 
 require(["app"], function(App) {
-    window.bAuto = new App();
+    window.bAuto = new App;
 });
