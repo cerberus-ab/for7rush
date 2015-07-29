@@ -1,22 +1,20 @@
 define([
     "text!templates/cars.html",
-    "storage/brands",
     "views/car"
 
-], function(template, brands, CarView) {
+], function(template, CarView) {
 
     return Backbone.View.extend({
         el: "#subpage_col",
         template: _.template(template),
 
         initialize: function() {
-            console.log(this.collection);
         },
 
         render: function() {
             var self = this;
             self.$el.html(self.template({
-                filters: brands
+                filters: self.collection.meta("brands")
             }));
             self.$list = self.$el.find("#catalog_list");
             self.collection.forEach(function(currentCar) {

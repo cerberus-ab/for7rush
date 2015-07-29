@@ -6,7 +6,18 @@
     </div>
 </div>
 <div id="content">
-    <div class="subpage" id="subpage_col"></div>
+    <div class="subpage" id="subpage_col">
+        <div id="control">
+            <div class="tabs tabs-com" id="filter_brand">
+                <a class="tab" href="#" data-filter="all">Все автомобили</a>
+                <% filters.forEach(function(currentFilter) { %>
+                    <a class="tab" href="#" data-filter="<%= currentFilter.value %>"><%= currentFilter.label %></a>
+                <% }) %>
+            </div>
+        </div>
+        <div class="table_container" id="table_catalog"></div>
+        <div class="table_container" id="table_favorites"></div>
+    </div>
     <div class="subpage" id="subpage_sta"></div>
 </div>
 <div id="footer"></div>

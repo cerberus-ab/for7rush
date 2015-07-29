@@ -1,0 +1,7 @@
+@import "constants.scss";
+@import "basic.scss";
+@import "default.scss";
+
+body {
+    @include background($path_img + $path_bg);
+}

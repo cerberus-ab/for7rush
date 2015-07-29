@@ -1,23 +1,34 @@
 define([
     "text!templates/app.html",
-    "views/cars"
+    "views/table"
 
-], function(template, CarsView) {
+], function(template, TableView) {
 
     return Backbone.View.extend({
         el: "#bauto_app",
         template: _.template(template),
 
         initialize: function(options) {
+            this.app = options.app;
             this.childs = {};
-            this.collections = {};
-            this.collections.cars = options.cars;
         },
 
         render: function() {
-            this.$el.html(this.template());
-            this.childs.cars = new CarsView({ collection: this.collections.cars });
-            this.childs.cars.render();
+            // рендеринг каркаса
+            this.$el.html(this.template({
+                filters: this.app.meta.brands
+            }));
+            // таблицы автомобилей и избранного как дочерние представления
+            this.childs.catalog = new TableView.Catalog({
+                collection: this.app.collections.catalog,
+                el: "#table_catalog"
+            }).render();
+            this.childs.faworites = new TableView.Favorites({
+                collection: this.app.collections.favorites,
+                el: "#table_favorites"
+            }).render();
+            // статистика как дочернее представление
+
             return this;
         },
 
