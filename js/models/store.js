@@ -50,26 +50,29 @@ define(function() {
 
         /**
          * Выбор автомобиля
-         * @param  {CarModel} car модель автомобиля
+         * @param  {Model} model модель автомобиля
          */
-        choiceCar: function(car) {
-            if (this.data.indexOf(car.cid) <0) {
-                this.data.push(car.cid);
-                typeof this.data.statistics[car.brand] !== "undefined"
-                    ? this.data.statistics[car.brand]++
-                    : this.data.statistics[car.brand] = 1;
+        setFavorite: function(model) {
+            var cid = model.get("cid"),
+                brand = model.get("brand");
+            if (this.data.choiced.indexOf(cid) < 0) {
+                this.data.choiced.push(cid);
+                typeof this.data.statistics[brand] !== "undefined"
+                    ? this.data.statistics[brand]++
+                    : this.data.statistics[brand] = 1;
                 storage.save(this.data);
             };
         },
 
         /**
          * Отмена выбора автомобиля
-         * @param  {CarModel} car модель автомобиля
+         * @param  {Model} model модель автомобиля
          */
-        cancelCar: function(car) {
-            var index = this.data.indexOf(car.cid);
+        resetFavorite: function(model) {
+            var index = this.data.choiced.indexOf(model.get("cid"));
             if (index +1) {
                 this.data.choiced.splice(index, 1);
+                storage.save(this.data);
             };
         }
     });

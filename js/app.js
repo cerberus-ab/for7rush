@@ -16,8 +16,8 @@ define([
         this.collections = {};
 
         // метаинформация о приложении
-        this.meta = {};
-        this.meta.brands = brands;
+        this._meta = {};
+        this._meta.brands = brands;
 
         // инициализация модели хранимых на клиенте данных
         this.store = new StoreModel({
@@ -30,14 +30,20 @@ define([
         });
 
         // инициализация коллекции автомобилей
+        // используются один и те же модели
         this.collections.catalog = new CarsCollection(catalog);
-        this.collections.favorites = new CarsCollection(catalog.filter(function(currentCar) {
-            return currentCar.isFav;
+        this.collections.favorites = new CarsCollection(this.collections.catalog.models.filter(function(currentCar) {
+            return currentCar.get("isFav");
         }));
 
         // инициализация представления приложения
         this.views.app = new AppView({
-            app: this
+            // использует коллекции автомобилей и модель статистики
+            // для формирования дочерних представлений
+            collections: this.collections,
+            store: this.store,
+            // использует метаинформацию о приложении
+            _meta: this._meta
         });
         this.views.app.render();
     };

@@ -3,7 +3,8 @@ define(function() {
     return Backbone.Model.extend({
         toggle: function() {
             this.set("isFav", !this.get("isFav"));
-            this.trigger("toggle", this);
+            // сигнал о смене статуса модели
+            this.trigger(this.get("isFav") ? "setFavorite" : "resetFavorite", this);
         }
     });
 });
