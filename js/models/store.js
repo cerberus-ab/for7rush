@@ -16,7 +16,7 @@ define(function() {
             });
             return {
                 /** @type {array} массив идентификаторов выбранных авто */
-                choiced: [2,3],
+                choiced: [],
                 /** @type {object} статистика по брендам */
                 statistics: statistics
             };

@@ -1,23 +1,23 @@
 <div id="header">
-    <div class="insets_menu">
-        <a class="inset" href="#" id="inset_cat"><div>Каталог</div></a>
-        <a class="inset" href="#" id="inset_fav"><div>Избранное</div></a>
-        <a class="inset" href="#" id="inset_sta"><div>Статистика</div></a>
+    <div class="insets_menu" id="navigate">
+        <a class="inset selected" href="#" data-subpageid="subpage_col" data-tableid="table_catalog"><div>Каталог</div></a>
+        <a class="inset" href="#" data-subpageid="subpage_col" data-tableid="table_favorites"><div>Избранное</div></a>
+        <a class="inset" href="#" data-subpageid="subpage_sta"><div>Статистика</div></a>
     </div>
 </div>
 <div id="header-position-height-offset"></div>
 <div id="content">
     <div class="subpage" id="subpage_col">
         <div class="tabs_menu" id="filter_brand">
-            <a class="tab" href="#" data-filter="all">Все автомобили</a>
+            <a class="tab selected" href="#" data-filter="_all">Все автомобили</a>
             <% filters.forEach(function(currentFilter) { %>
                 <a class="tab" href="#" data-filter="<%= currentFilter.value %>"><div><%= currentFilter.label %></div></a>
             <% }) %>
         </div>
         <div style="clear: both;"></div>
         <div class="table_container" id="table_catalog"></div>
-        <div class="table_container" id="table_favorites"></div>
+        <div class="table_container" id="table_favorites" style="display:none;"></div>
     </div>
-    <div class="subpage" id="subpage_sta"></div>
+    <div class="subpage" id="subpage_sta" style="display:none;"></div>
 </div>
 <div id="footer"></div>
