@@ -1,8 +1,9 @@
 define([
     "text!templates/app.html",
-    "views/table"
+    "views/table",
+    "views/statistics"
 
-], function(template, TableView) {
+], function(template, TableView, StatiscticsView) {
 
     return Backbone.View.extend({
         el: "#bauto_app",
@@ -33,7 +34,11 @@ define([
                 el: "#table_favorites"
             }).render();
             // статистика как дочернее представление
-
+            this.childs.statisctics = new StatiscticsView({
+                model: this.options.store,
+                id: "statistics_container"
+            });
+            $("#subpage_sta").append(this.childs.statisctics.render().el);
             return this;
         },
 
@@ -43,7 +48,7 @@ define([
          */
         setFavorite: function(model) {
             this.options.store.setFavorite(model);
-            this.options.collections.favorites.add(model, { at: 0 });
+            this.options.collections.favorites.add(model);
         },
 
         /**

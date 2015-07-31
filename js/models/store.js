@@ -45,7 +45,16 @@ define(function() {
     return Backbone.Model.extend({
 
         initialize: function(options) {
-            this.data = storage.load(options.brands);
+            var data = storage.load(options.brands);
+            this.set("choiced", data.choiced);
+            this.set("statistics", data.statistics);
+        },
+
+        save: function() {
+            storage.save({
+                choiced: this.get("choiced"),
+                statistics: this.get("statistics")
+            });
         },
 
         /**
@@ -54,13 +63,19 @@ define(function() {
          */
         setFavorite: function(model) {
             var cid = model.get("cid"),
-                brand = model.get("brand");
-            if (this.data.choiced.indexOf(cid) < 0) {
-                this.data.choiced.push(cid);
-                typeof this.data.statistics[brand] !== "undefined"
-                    ? this.data.statistics[brand]++
-                    : this.data.statistics[brand] = 1;
-                storage.save(this.data);
+                brand = model.get("brand"),
+                choiced = this.get("choiced"),
+                statistics = this.get("statistics");
+
+            if (choiced.indexOf(cid) < 0) {
+                choiced.push(cid);
+                typeof statistics[brand] !== "undefined"
+                    ? statistics[brand]++
+                    : statistics[brand] = 1;
+
+                this.set("choiced", choiced);
+                this.set("statistics", statistics);
+                this.save();
             };
         },
 
@@ -69,10 +84,14 @@ define(function() {
          * @param  {Model} model модель автомобиля
          */
         resetFavorite: function(model) {
-            var index = this.data.choiced.indexOf(model.get("cid"));
+            var choiced = this.get("choiced"),
+                index = choiced.indexOf(model.get("cid"));
+
             if (index +1) {
-                this.data.choiced.splice(index, 1);
-                storage.save(this.data);
+                choiced.splice(index, 1);
+
+                this.set("choiced", choiced);
+                this.save();
             };
         }
     });

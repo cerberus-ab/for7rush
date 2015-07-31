@@ -4,6 +4,7 @@ requirejs.config({
         "jquery": "lib/jquery-1.11.3-min",
         "underscore": "lib/underscore-min",
         "backbone": "lib/backbone-min",
+        "highcharts": "lib/highcharts-min",
         "text": "lib/text"
     },
     shim: {
@@ -14,8 +15,11 @@ requirejs.config({
             deps: ["jquery", "underscore", "text"],
             exports: "Backbone"
         },
+        "highcharts": {
+            deps: ["jquery"]
+        },
         "app": {
-            deps: ["backbone"]
+            deps: ["backbone", "highcharts"]
         }
     }
 });

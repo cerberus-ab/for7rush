@@ -4,6 +4,9 @@ define([
 
 ], function(template, CarView) {
 
+    var tooltip_timer = null,
+        tooltip_hidden = true;
+
     // Абстрактный класс представления таблицы
     var TableView = Backbone.View.extend({
         template: _.template(template),
@@ -29,13 +32,35 @@ define([
         renderFiltered: function(brand) {
             var self = this,
                 showAll = brand === "_all";
-            this.list = this.collection.filter(function(currentModel) {
+            this.list = this.collection.models.filter(function(currentModel) {
                 return showAll || currentModel.get("brand") === brand;
             });
             this.list.forEach(function(currentModel) {
                 self.$tbody.append(self.getRenderModelEl(currentModel));
             });
             this.$amount.text(this.list.length);
+        },
+
+        events: {
+            "mouseover .td_image": "imageShow",
+            "mouseleave .td_image": "imageHide"
+        },
+
+        imageShow: function(e) {
+            e.preventDefault();
+            tooltip_timer = setTimeout(function() {
+                tooltip_hidden = false;
+                $(e.currentTarget).parent().find(".td_image_tt").fadeTo(200, 1);
+            }, 500);
+        },
+
+        imageHide: function(e) {
+            e.preventDefault();
+            clearTimeout(tooltip_timer);
+            if (!tooltip_hidden) {
+                tooltip_hidden = true;
+                $(e.currentTarget).parent().find(".td_image_tt").fadeTo(200, 0);
+            }
         },
 
         /**
@@ -56,7 +81,7 @@ define([
         addCar: function(model) {
             var brand = this.collection.meta("brand");
             if (brand === "_all" || model.get("brand") === brand) {
-                this.$tbody.prepend(this.getRenderModelEl(model));
+                this.$tbody.append(this.getRenderModelEl(model));
                 this.$amount.text(this.$amount.text() -0 +1);
             }
         },

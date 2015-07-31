@@ -25,8 +25,9 @@ define([
         });
 
         // пометить в каталоге автомобили, выбранные на этом клиенте
+        var choiced = this.store.get("choiced");
         catalog.forEach(function(currentCar) {
-            currentCar.isFav = self.store.data.choiced.indexOf(currentCar.cid) > -1;
+            currentCar.isFav = choiced.indexOf(currentCar.cid) > -1;
         });
 
         // инициализация коллекции автомобилей
