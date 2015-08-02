@@ -26,4 +26,8 @@ requirejs.config({
 
 require(["app"], function(App) {
     window.bAuto = new App;
+
+    $(document).ready(function() {
+        Backbone.history.start({ root: "/semrush/" });
+    });
 });

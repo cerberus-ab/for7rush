@@ -12,8 +12,7 @@ define([
         template: _.template(template),
 
         initialize: function() {
-            this.collection.on("add", this.addCar, this);
-            this.collection.on("remove", this.removeCar, this);
+            this.collection.on("add remove", this.render, this);
             this.collection.on("meta", this.metaChanged, this);
         },
 
@@ -72,26 +71,6 @@ define([
             if (prop === "brand") {
                 this.render();
             }
-        },
-
-        /**
-         * Добавить представление нового автомобиля
-         * @param  {Model} model модель автомобиля
-         */
-        addCar: function(model) {
-            var brand = this.collection.meta("brand");
-            if (brand === "_all" || model.get("brand") === brand) {
-                this.$tbody.append(this.getRenderModelEl(model));
-                this.$amount.text(this.$amount.text() -0 +1);
-            }
-        },
-
-        /**
-         * Удаление представления автомобиля из коллекции
-         * @param  {Model} model модель автомобиля
-         */
-        removeCar: function(model) {
-            this.render();
         }
     });
 

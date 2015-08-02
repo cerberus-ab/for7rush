@@ -52,15 +52,16 @@ body {
   left: 0;
   right: 0;
   top: 0;
+  z-index: 10;
 }
 
-/* line 190, scss/main.scss */
+/* line 191, scss/main.scss */
 #header-position-height-offset {
   height: 40px;
   margin-bottom: 12px;
 }
 
-/* line 195, scss/main.scss */
+/* line 196, scss/main.scss */
 .table_container {
   border: 1px solid #696969;
   border-radius: 2px;
@@ -164,7 +165,7 @@ body {
   text-align: center;
 }
 
-/* line 200, scss/main.scss */
+/* line 201, scss/main.scss */
 .tabs_menu {
   float: left;
   border: 1px solid #696969;
@@ -200,7 +201,7 @@ body {
   background-color: #A9A9A9;
 }
 
-/* line 205, scss/main.scss */
+/* line 206, scss/main.scss */
 .insets_menu {
   float: left;
   border: 1px solid #696969;
@@ -238,7 +239,7 @@ body {
   background-color: #A9A9A9;
 }
 
-/* line 212, scss/main.scss */
+/* line 213, scss/main.scss */
 .button {
   border: 1px solid #696969;
   border-radius: 2px;
@@ -257,4 +258,13 @@ body {
   cursor: default;
   color: silver;
   text-shadow: none;
+}
+
+/* line 217, scss/main.scss */
+#statistics_container {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  max-width: 1200px;
+  height: 400px;
 }

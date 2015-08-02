@@ -44,8 +44,9 @@ define(function() {
 
     return Backbone.Model.extend({
 
-        initialize: function(options) {
-            var data = storage.load(options.brands);
+        initialize: function(attributes) {
+            // attributes.brands - используемые брэнды
+            var data = storage.load(attributes.brands);
             this.set("choiced", data.choiced);
             this.set("statistics", data.statistics);
         },
@@ -68,13 +69,13 @@ define(function() {
                 statistics = this.get("statistics");
 
             if (choiced.indexOf(cid) < 0) {
-                choiced.push(cid);
-                typeof statistics[brand] !== "undefined"
-                    ? statistics[brand]++
-                    : statistics[brand] = 1;
+                choiced.unshift(cid);
+                statistics[brand]++;
 
                 this.set("choiced", choiced);
                 this.set("statistics", statistics);
+                this.trigger("changeStat");
+
                 this.save();
             };
         },

@@ -1,22 +1,22 @@
 <div id="header">
     <div class="insets_menu" id="navigate">
-        <a class="inset selected" href="#" data-subpageid="subpage_col" data-tableid="table_catalog"><div>Список автомобилей</div></a>
-        <a class="inset" href="#" data-subpageid="subpage_col" data-tableid="table_favorites"><div>Избранные автомобили</div></a>
-        <a class="inset" href="#" data-subpageid="subpage_sta"><div>Статистика</div></a>
+        <a class="inset selected" name="catalog" href="#" data-subpageid="subpage_col" data-partcl="spp_catalog"><div>Список автомобилей</div></a>
+        <a class="inset" name="favorites" href="#" data-subpageid="subpage_col" data-partcl="spp_favorites"><div>Избранные автомобили</div></a>
+        <a class="inset" name="statistics" href="#" data-subpageid="subpage_sta"><div>Статистика</div></a>
     </div>
 </div>
 <div id="header-position-height-offset"></div>
 <div id="content">
     <div class="subpage" id="subpage_col">
         <div class="tabs_menu" id="filter_brand">
-            <a class="tab selected" href="#" data-filter="_all">Все автомобили</a>
+            <a class="tab selected" href="#" data-brand="_all">Все автомобили</a>
             <% filters.forEach(function(currentFilter) { %>
-                <a class="tab" href="#" data-filter="<%= currentFilter.value %>"><div><%= currentFilter.label %></div></a>
+                <a class="tab" href="#" data-brand="<%= currentFilter.value %>"><div><%= currentFilter.label %></div></a>
             <% }) %>
         </div>
         <div style="clear: both;"></div>
-        <div class="table_container" id="table_catalog"></div>
-        <div class="table_container" id="table_favorites" style="display:none;"></div>
+        <div class="table_container subpage_part spp_catalog" id="table_catalog"></div>
+        <div class="table_container subpage_part spp_favorites" id="table_favorites" style="display:none;"></div>
     </div>
     <div class="subpage" id="subpage_sta" style="display:none;"></div>
 </div>

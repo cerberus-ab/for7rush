@@ -33,9 +33,11 @@ define([
         // инициализация коллекции автомобилей
         // используются один и те же модели
         this.collections.catalog = new CarsCollection(catalog);
-        this.collections.favorites = new CarsCollection(this.collections.catalog.models.filter(function(currentCar) {
-            return currentCar.get("isFav");
-        }));
+        this.collections.favorites = new CarsCollection(_.compact(choiced.map(function(currentId) {
+            return self.collections.catalog.find(function(currentCar) {
+                return currentCar.get("cid") === currentId;
+            });
+        })));
 
         // инициализация представления приложения
         this.views.app = new AppView({
