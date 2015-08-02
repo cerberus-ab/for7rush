@@ -1,24 +1,48 @@
 define([
     "text!templates/app.html",
+    "models/navigate",
     "views/table",
     "views/statistics"
 
-], function(template, TableView, StatiscticsView) {
+], function(template, AppViewNavigateModel, TableView, StatiscticsView) {
+
+    // ссылка на используемое приложение
+    var app = null;
+
+    // навигация по приложению
+    var navi = new AppViewNavigateModel();
 
     return Backbone.View.extend({
         el: "#bauto_app",
         template: _.template(template),
 
-        initialize: function(options) {
+        initialize: function(_app) {
+            var self = this;
+            app = _app;
             this.childs = {};
-            this.options.collections.catalog.on("setFavorite", this.setFavorite, this);
-            this.options.collections.favorites.on("resetFavorite", this.resetFavorite, this);
+            // события коллекций
+            app.collections.catalog.on("setFavorite", this.setFavorite, this);
+            app.collections.favorites.on("resetFavorite", this.resetFavorite, this);
+            // роутинг
+            app.router.on("route:openCatalog", function(brand) {
+                self.openInsetByName("catalog");
+                self.openBrandByName(brand);
+            });
+            app.router.on("route:openFavorites", function(brand) {
+                self.openInsetByName("favorites");
+                self.openBrandByName(brand);
+            });
+            app.router.on("route:openStatistics", function() {
+                self.openInsetByName("statistics");
+            });
+            // навигация
+            navi.on("changeUrl", app.router.navigate);
         },
 
         render: function() {
             // рендеринг каркаса
             this.$el.html(this.template({
-                filters: this.options._meta.brands
+                filters: app._meta.brands
             }));
             // сохранить ссылки на используемые элементы
             this.$insets = this.$el.find("#navigate .inset");
@@ -27,16 +51,16 @@ define([
             this.$brands = this.$fbrand.find(".tab");
             // таблицы автомобилей и избранного как дочерние представления
             this.childs.catalog = new TableView.Catalog({
-                collection: this.options.collections.catalog,
+                collection: app.collections.catalog,
                 el: "#table_catalog"
             }).render();
             this.childs.favorites = new TableView.Favorites({
-                collection: this.options.collections.favorites,
+                collection: app.collections.favorites,
                 el: "#table_favorites"
             }).render();
             // статистика как дочернее представление
             this.childs.statistics = new StatiscticsView({
-                model: this.options.store,
+                model: app.store,
                 id: "statistics_container"
             });
             $("#subpage_sta").append(this.childs.statistics.render().el);
@@ -48,8 +72,9 @@ define([
          * @param  {Model} model модель автомобиля
          */
         setFavorite: function(model) {
-            this.options.store.setFavorite(model);
-            this.options.collections.favorites.add(model, { at: 0 });
+            app.store.setFavorite(model);
+            // добавление в начало коллекции
+            app.collections.favorites.add(model, { at: 0 });
         },
 
         /**
@@ -57,22 +82,14 @@ define([
          * @param  {Model} model модель удаляемого автомобиля
          */
         resetFavorite: function(model) {
-            this.options.store.resetFavorite(model);
-            this.options.collections.favorites.remove(model);
+            app.store.resetFavorite(model);
+            app.collections.favorites.remove(model);
         },
 
         // собственные события представления
         events: {
             "click #navigate .inset:not(.selected)": "openInsetByClick",
             "click #filter_brand .tab:not(.selected)": "openBrandByClick"
-        },
-
-        saveNavigate: function() {
-            var brand = this.$brands.filter(".selected").attr("data-brand"),
-                fragment = this.$insets.filter(".selected").attr("name")
-                    + (this.$fbrand.is(":visible") && brand !== "_all"
-                        ? ("/" + brand) : "");
-            bAuto.router.navigate(fragment);
         },
 
         /**
@@ -99,7 +116,7 @@ define([
                     $this.toggle($this.hasClass(spp_class));
                 });
             }
-            this.saveNavigate();
+            navi.set("subpage", $tab.attr("name"));
         },
 
         /**
@@ -112,9 +129,9 @@ define([
             this.$brands.toggleClass("selected", false);
             $tab.toggleClass("selected", true);
             // сигнал о смене брэнда для коллекций
-            this.options.collections.catalog.meta("brand", brand);
-            this.options.collections.favorites.meta("brand", brand);
-            this.saveNavigate();
+            app.collections.catalog.meta("brand", brand);
+            app.collections.favorites.meta("brand", brand);
+            navi.set("brand", brand);
         },
 
         /**
@@ -141,18 +158,22 @@ define([
          */
         openInsetByName: function(name) {
             var $inset = this.$insets.filter("[name='" + name + "']");
-            if ($inset.length) $inset.click();
+            if ($inset.length) this.openInset($inset);
             else console.error("Undefined inset with name '" + name + "'!");
         },
 
         /**
-         * Открыть брэнд по названию
+         * Открыть брэнд по имени
          * @param  {string} brand название брэнда
          */
         openBrandByName: function(name) {
             var $brand = this.$brands.filter("[data-brand='" + name + "']");
-            if (!$brand.length) $brand = this.$brands.filter("[data-brand='_all']");
-            $brand.click();
+            // если брэнд не существует, то ошибка и показать все
+            if (!$brand.length) {
+                $brand = this.$brands.filter("[data-brand='_all']");
+                console.error("Undefined brand with name '" + name + "'!");
+            }
+            this.openBrand($brand);
         }
     });
 });

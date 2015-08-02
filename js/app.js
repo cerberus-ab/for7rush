@@ -40,14 +40,7 @@ define([
         })));
 
         // инициализация представления приложения
-        this.views.app = new AppView({
-            // использует коллекции автомобилей и модель статистики
-            // для формирования дочерних представлений
-            collections: this.collections,
-            store: this.store,
-            // использует метаинформацию о приложении
-            _meta: this._meta
-        });
+        this.views.app = new AppView(self);
         this.views.app.render();
     };
 
