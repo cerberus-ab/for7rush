@@ -20,6 +20,7 @@ define([
             this.$el.html(this.template());
             this.$tbody = this.$el.find("tbody");
             this.$amount = this.$el.find(".table_amount");
+            this.$imgtt = this.$el.find(".td_image_tt");
             this.renderFiltered(this.collection.meta("brand"));
             return this;
         },
@@ -47,9 +48,13 @@ define([
 
         imageShow: function(e) {
             e.preventDefault();
+            var self = this;
             tooltip_timer = setTimeout(function() {
                 tooltip_hidden = false;
-                $(e.currentTarget).parent().find(".td_image_tt").fadeTo(200, 1);
+                var $target = $(e.currentTarget),
+                    img_src = $target.attr("data-img");
+                self.$imgtt.find("img").attr("src", img_src);
+                self.$imgtt.appendTo($target.parent()).fadeIn(200);
             }, 500);
         },
 
@@ -58,7 +63,7 @@ define([
             clearTimeout(tooltip_timer);
             if (!tooltip_hidden) {
                 tooltip_hidden = true;
-                $(e.currentTarget).parent().find(".td_image_tt").fadeTo(200, 0);
+                this.$imgtt.fadeOut(200);
             }
         },
 

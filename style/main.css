@@ -43,7 +43,7 @@ body {
   background: white url("../img/bg.png") repeat top left;
 }
 
-/* line 181, scss/main.scss */
+/* line 186, scss/main.scss */
 #header {
   height: 40px;
   background-color: white;
@@ -55,13 +55,13 @@ body {
   z-index: 10;
 }
 
-/* line 191, scss/main.scss */
+/* line 196, scss/main.scss */
 #header-position-height-offset {
   height: 40px;
   margin-bottom: 12px;
 }
 
-/* line 196, scss/main.scss */
+/* line 201, scss/main.scss */
 .table_container {
   border: 1px solid #696969;
   border-radius: 2px;
@@ -91,8 +91,11 @@ body {
   height: 150px;
   display: inline-block;
   background-size: cover;
+  border: 1px solid #696969;
+  border-radius: 2px;
+  background-color: white;
 }
-/* line 33, scss/main.scss */
+/* line 36, scss/main.scss */
 .table_container .table_content table tr .td_image_tt {
   top: 20px;
   left: 220px;
@@ -102,70 +105,72 @@ body {
   border: 1px solid #696969;
   background-color: white;
   box-shadow: 0 0 8px #696969;
+  min-height: 240px;
+  min-width: 320px;
 }
-/* line 44, scss/main.scss */
+/* line 49, scss/main.scss */
 .table_container .table_content table tr td {
   padding: 2px 4px 4px 4px;
   vertical-align: top;
   text-align: left;
 }
-/* line 48, scss/main.scss */
+/* line 53, scss/main.scss */
 .table_container .table_content table tr td:first-child {
   border-right: 1px solid #A9A9A9;
   width: 200px;
   position: relative;
 }
-/* line 53, scss/main.scss */
+/* line 58, scss/main.scss */
 .table_container .table_content table tr td:nth-child(2) {
   width: 200px;
 }
-/* line 56, scss/main.scss */
+/* line 61, scss/main.scss */
 .table_container .table_content table tr td:nth-child(4) {
   width: 150px;
 }
-/* line 61, scss/main.scss */
+/* line 66, scss/main.scss */
 .table_container .table_content table tr:not(:last-child) td {
   border-bottom: 1px solid #A9A9A9;
 }
-/* line 66, scss/main.scss */
+/* line 71, scss/main.scss */
 .table_container .table_content table thead {
   background-color: #D3D3D3;
 }
-/* line 68, scss/main.scss */
+/* line 73, scss/main.scss */
 .table_container .table_content table thead tr {
   height: 24px;
 }
-/* line 70, scss/main.scss */
+/* line 75, scss/main.scss */
 .table_container .table_content table thead tr td {
   vertical-align: middle;
   border-top: 1px solid white;
   border-right: 1px solid white;
   text-shadow: 0 1px 1px white;
 }
-/* line 75, scss/main.scss */
+/* line 80, scss/main.scss */
 .table_container .table_content table thead tr td:first-child {
   border-right: 1px solid white;
   border-left: 1px solid white;
 }
-/* line 83, scss/main.scss */
+/* line 88, scss/main.scss */
 .table_container .table_content table tbody tr:hover {
   background-color: white;
 }
-/* line 87, scss/main.scss */
+/* line 92, scss/main.scss */
 .table_container .table_content table tbody tr td:first-child {
   padding: 2px;
 }
-/* line 90, scss/main.scss */
+/* line 95, scss/main.scss */
 .table_container .table_content table tbody tr td:nth-child(4) {
   padding-top: 8px;
   padding-bottom: 8px;
 }
-/* line 94, scss/main.scss */
+/* line 99, scss/main.scss */
 .table_container .table_content table tbody tr td:first-child, .table_container .table_content table tbody tr td:nth-child(4) {
   text-align: center;
 }
 
-/* line 201, scss/main.scss */
+/* line 206, scss/main.scss */
 .tabs_menu {
   float: left;
   border: 1px solid #696969;
@@ -173,7 +178,7 @@ body {
   box-shadow: 0 0 2px #696969;
   margin: 0 8px 8px 8px;
 }
-/* line 108, scss/main.scss */
+/* line 113, scss/main.scss */
 .tabs_menu a.tab {
   cursor: pointer;
   text-decoration: none;
@@ -188,20 +193,20 @@ body {
   background-color: white;
   text-shadow: 0 1px 1px white;
 }
-/* line 121, scss/main.scss */
+/* line 126, scss/main.scss */
 .tabs_menu a.tab:not(:last-child) {
   border-right: 1px solid #696969;
 }
-/* line 124, scss/main.scss */
+/* line 129, scss/main.scss */
 .tabs_menu a.tab:not(.selected):hover {
   background-color: #D3D3D3;
 }
-/* line 127, scss/main.scss */
+/* line 132, scss/main.scss */
 .tabs_menu a.tab.selected {
   background-color: #A9A9A9;
 }
 
-/* line 206, scss/main.scss */
+/* line 211, scss/main.scss */
 .insets_menu {
   float: left;
   border: 1px solid #696969;
@@ -211,7 +216,7 @@ body {
   bottom: 0;
   left: 8px;
 }
-/* line 138, scss/main.scss */
+/* line 143, scss/main.scss */
 .insets_menu a.inset {
   cursor: pointer;
   text-decoration: none;
@@ -226,20 +231,20 @@ body {
   background-color: white;
   text-shadow: 0 1px 1px white;
 }
-/* line 151, scss/main.scss */
+/* line 156, scss/main.scss */
 .insets_menu a.inset:not(:last-child) {
   border-right: 1px solid #696969;
 }
-/* line 154, scss/main.scss */
+/* line 159, scss/main.scss */
 .insets_menu a.inset:not(.selected):hover {
   background-color: #D3D3D3;
 }
-/* line 157, scss/main.scss */
+/* line 162, scss/main.scss */
 .insets_menu a.inset.selected {
   background-color: #A9A9A9;
 }
 
-/* line 213, scss/main.scss */
+/* line 218, scss/main.scss */
 .button {
   border: 1px solid #696969;
   border-radius: 2px;
@@ -249,18 +254,18 @@ body {
   height: 24px;
   min-width: 100px;
 }
-/* line 171, scss/main.scss */
+/* line 176, scss/main.scss */
 .button:enabled:hover {
   background-color: #D3D3D3;
 }
-/* line 174, scss/main.scss */
+/* line 179, scss/main.scss */
 .button:disabled {
   cursor: default;
   color: silver;
   text-shadow: none;
 }
 
-/* line 217, scss/main.scss */
+/* line 222, scss/main.scss */
 #statistics_container {
   padding-left: 10px;
   padding-right: 10px;

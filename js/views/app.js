@@ -168,10 +168,10 @@ define([
          */
         openBrandByName: function(name) {
             var $brand = this.$brands.filter("[data-brand='" + name + "']");
-            // если брэнд не существует, то ошибка и показать все
+            // если брэнд не существует, то показать все
             if (!$brand.length) {
                 $brand = this.$brands.filter("[data-brand='_all']");
-                console.error("Undefined brand with name '" + name + "'!");
+                //console.error("Undefined brand with name '" + name + "'!");
             }
             this.openBrand($brand);
         }
