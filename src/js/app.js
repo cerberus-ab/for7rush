@@ -10,7 +10,7 @@
  *
  */
 define([
-    "router",               // роутер
+    "routers/router",       // роутер
     "models/store",         // модель хранимых на клиенте данных
     "views/app",            // представление приложения
     "collections/cars",     // коллекция автомобилей

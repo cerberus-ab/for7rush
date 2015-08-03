@@ -1,4 +1,4 @@
-/* line 1, /Applications/MAMP/htdocs/semrush/style/scss/_default.scss */
+/* line 1, scss/_default.scss */
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, em, font, img, ins, small, strong, sub, sup, b, u, i, center, ol, ul, li, fieldset, form, label, legend, table, tbody, th, td {
   border: 0;
   outline: 0;
@@ -8,13 +8,13 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
   padding: 0;
 }
 
-/* line 9, /Applications/MAMP/htdocs/semrush/style/scss/_default.scss */
+/* line 9, scss/_default.scss */
 html {
   height: 100%;
   width: 100%;
 }
 
-/* line 13, /Applications/MAMP/htdocs/semrush/style/scss/_default.scss */
+/* line 13, scss/_default.scss */
 div, input, select, textarea, ul {
   display: block;
   margin: 0;
@@ -24,13 +24,13 @@ div, input, select, textarea, ul {
   -webkit-box-sizing: border-box !important;
 }
 
-/* line 19, /Applications/MAMP/htdocs/semrush/style/scss/_default.scss */
+/* line 19, scss/_default.scss */
 table {
   width: 100%;
   border-spacing: 0;
 }
 
-/* line 23, /Applications/MAMP/htdocs/semrush/style/scss/_default.scss */
+/* line 23, scss/_default.scss */
 body {
   height: 100%;
   width: 100%;
@@ -70,22 +70,22 @@ body {
   cursor: default;
   margin: 0 8px 12px 8px;
 }
-/* line 5, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 5, scss/_table.scss */
 .table_container .table_header {
   height: 24px;
   background-color: darkgrey;
   padding-left: 5px;
 }
-/* line 9, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 9, scss/_table.scss */
 .table_container .table_header p {
   font-size: 16px;
   line-height: 24px;
 }
-/* line 16, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 16, scss/_table.scss */
 .table_container .table_content table tr {
   min-height: 20px;
 }
-/* line 17, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 17, scss/_table.scss */
 .table_container .table_content table tr .td_image {
   width: 150px;
   height: 150px;
@@ -96,7 +96,7 @@ body {
   border-radius: 2px;
   box-shadow: 0 0 2px dimgrey;
 }
-/* line 25, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 25, scss/_table.scss */
 .table_container .table_content table tr .td_image_tt {
   top: 20px;
   left: 220px;
@@ -110,64 +110,64 @@ body {
   min-height: 240px;
   min-width: 320px;
 }
-/* line 37, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 37, scss/_table.scss */
 .table_container .table_content table tr td {
   padding: 2px 4px 4px 4px;
   vertical-align: top;
   text-align: left;
 }
-/* line 41, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 41, scss/_table.scss */
 .table_container .table_content table tr td:first-child {
   border-right: 1px solid darkgrey;
   width: 200px;
   position: relative;
 }
-/* line 46, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 46, scss/_table.scss */
 .table_container .table_content table tr td:nth-child(2) {
   width: 200px;
 }
-/* line 49, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 49, scss/_table.scss */
 .table_container .table_content table tr td:nth-child(4) {
   width: 150px;
 }
-/* line 54, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 54, scss/_table.scss */
 .table_container .table_content table tr:not(:last-child) td {
   border-bottom: 1px solid darkgrey;
 }
-/* line 59, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 59, scss/_table.scss */
 .table_container .table_content table thead {
   background-color: lightgrey;
 }
-/* line 61, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 61, scss/_table.scss */
 .table_container .table_content table thead tr {
   height: 24px;
 }
-/* line 63, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 63, scss/_table.scss */
 .table_container .table_content table thead tr td {
   vertical-align: middle;
   border-top: 1px solid white;
   border-right: 1px solid white;
   text-shadow: 0 1px 1px white;
 }
-/* line 68, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 68, scss/_table.scss */
 .table_container .table_content table thead tr td:first-child {
   border-right: 1px solid white;
   border-left: 1px solid white;
 }
-/* line 76, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 76, scss/_table.scss */
 .table_container .table_content table tbody tr:hover {
   background-color: white;
 }
-/* line 80, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 80, scss/_table.scss */
 .table_container .table_content table tbody tr td:first-child {
   padding: 2px;
 }
-/* line 83, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 83, scss/_table.scss */
 .table_container .table_content table tbody tr td:nth-child(4) {
   padding-top: 8px;
   padding-bottom: 8px;
 }
-/* line 87, /Applications/MAMP/htdocs/semrush/style/scss/_table.scss */
+/* line 87, scss/_table.scss */
 .table_container .table_content table tbody tr td:first-child, .table_container .table_content table tbody tr td:nth-child(4) {
   text-align: center;
 }
@@ -180,7 +180,7 @@ body {
   box-shadow: 0 0 2px dimgrey;
   margin: 0 8px 8px 8px;
 }
-/* line 27, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 27, scss/_controls.scss */
 .tabs_menu a.tab {
   cursor: pointer;
   text-decoration: none;
@@ -195,15 +195,15 @@ body {
   height: 16px;
   padding: 4px 8px;
 }
-/* line 13, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 13, scss/_controls.scss */
 .tabs_menu a.tab:not(:last-child) {
   border-right: 1px solid dimgrey;
 }
-/* line 16, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 16, scss/_controls.scss */
 .tabs_menu a.tab:not(.selected):hover {
   background-color: lightgrey;
 }
-/* line 19, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 19, scss/_controls.scss */
 .tabs_menu a.tab.selected {
   background-color: darkgrey;
 }
@@ -218,7 +218,7 @@ body {
   bottom: 0;
   left: 8px;
 }
-/* line 38, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 38, scss/_controls.scss */
 .insets_menu a.inset {
   cursor: pointer;
   text-decoration: none;
@@ -233,15 +233,15 @@ body {
   height: 16px;
   padding: 4px 8px 8px 8px;
 }
-/* line 13, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 13, scss/_controls.scss */
 .insets_menu a.inset:not(:last-child) {
   border-right: 1px solid dimgrey;
 }
-/* line 16, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 16, scss/_controls.scss */
 .insets_menu a.inset:not(.selected):hover {
   background-color: lightgrey;
 }
-/* line 19, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 19, scss/_controls.scss */
 .insets_menu a.inset.selected {
   background-color: darkgrey;
 }
@@ -256,11 +256,11 @@ body {
   height: 24px;
   min-width: 100px;
 }
-/* line 51, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 51, scss/_controls.scss */
 .button:enabled:hover {
   background-color: lightgrey;
 }
-/* line 54, /Applications/MAMP/htdocs/semrush/style/scss/_controls.scss */
+/* line 54, scss/_controls.scss */
 .button:disabled {
   cursor: default;
   color: silver;
