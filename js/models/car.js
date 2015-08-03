@@ -1,3 +1,10 @@
+/**
+ * @module Модель автомобиля
+ *
+ * @description
+ * Инициирует события при добавлении и удалении из списка выбранных.
+ *
+ */
 define(function() {
 
     return Backbone.Model.extend({

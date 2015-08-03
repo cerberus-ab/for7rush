@@ -12,31 +12,27 @@
  */
 define(function() {
 
-    var url = "";
-
     return Backbone.Model.extend({
         initialize: function() {
+            this.set("_url", "");
             this.on("change:subpage change:brand", this.makeUrl, this);
             this.makeUrl();
         },
         makeUrl: function() {
             var subpage = this.get("subpage"),
                 brand = this.get("brand"),
-                _url = "";
+                url = "";
             switch (subpage) {
                 case "catalog":
                 case "favorites":
-                    _url = subpage + (brand && brand !== "_all"
+                    url = subpage + (brand && brand !== "_all"
                         ? "/" + brand : "");
                     break;
                 default:
-                    _url = subpage || "";
+                    url = subpage || "";
                     break;
             }
-            if (url !== _url) {
-                url = _url;
-                this.trigger("changeUrl", url);
-            }
+            this.set("_url", url);
         }
     });
 });

@@ -16,43 +16,45 @@ define([
 
 ], function(template, AppViewNavigateModel, TableView, StatiscticsView) {
 
-    // ссылка на используемое приложение
-    var app = null;
-
-    // навигация по приложению
-    var navi = new AppViewNavigateModel();
-
     return Backbone.View.extend({
         el: "#bauto_app",
         template: _.template(template),
 
-        initialize: function(_app) {
+        initialize: function(options) {
             var self = this;
-            app = _app;
             this.childs = {};
+
+            /** @type {App} ссылка на экземпляр приложения */
+            this._app = options.app;
+            /** @type {AppViewNavigateModel} модель навигации по представлению */
+            this._navi = new AppViewNavigateModel();
+
             // события коллекций
-            app.collections.catalog.on("setFavorite", this.setFavorite, this);
-            app.collections.favorites.on("resetFavorite", this.resetFavorite, this);
+            this._app.collections.catalog.on("setFavorite", this.setFavorite, this);
+            this._app.collections.favorites.on("resetFavorite", this.resetFavorite, this);
+
             // роутинг
-            app.router.on("route:openCatalog", function(brand) {
+            this._app.router.on("route:openCatalog", function(brand) {
                 self.openInsetByName("catalog");
                 self.openBrandByName(brand);
             });
-            app.router.on("route:openFavorites", function(brand) {
+            this._app.router.on("route:openFavorites", function(brand) {
                 self.openInsetByName("favorites");
                 self.openBrandByName(brand);
             });
-            app.router.on("route:openStatistics", function() {
+            this._app.router.on("route:openStatistics", function() {
                 self.openInsetByName("statistics");
             });
             // навигация
-            navi.on("changeUrl", app.router.navigate);
+            this._navi.on("change:_url", function(model, value) {
+                self._app.router.navigate(value);
+            });
         },
 
         render: function() {
             // рендеринг каркаса
             this.$el.html(this.template({
-                filters: app._meta.brands
+                filters: this._app._meta.brands
             }));
             // сохранить ссылки на используемые элементы
             this.$insets = this.$el.find("#navigate .inset");
@@ -60,16 +62,16 @@ define([
             this.$brands = this.$el.find("#filter_brand .tab");
             // таблицы автомобилей и избранного как дочерние представления
             this.childs.catalog = new TableView.Catalog({
-                collection: app.collections.catalog,
+                collection: this._app.collections.catalog,
                 el: "#table_catalog"
             }).render();
             this.childs.favorites = new TableView.Favorites({
-                collection: app.collections.favorites,
+                collection: this._app.collections.favorites,
                 el: "#table_favorites"
             }).render();
             // статистика как дочернее представление
             this.childs.statistics = new StatiscticsView({
-                model: app.store,
+                model: this._app.store,
                 id: "statistics_container"
             });
             $("#subpage_sta").append(this.childs.statistics.render().el);
@@ -81,9 +83,9 @@ define([
          * @param  {Model} model модель автомобиля
          */
         setFavorite: function(model) {
-            app.store.setFavorite(model);
+            this._app.store.setFavorite(model);
             // добавление в начало коллекции
-            app.collections.favorites.add(model, { at: 0 });
+            this._app.collections.favorites.add(model, { at: 0 });
         },
 
         /**
@@ -91,8 +93,8 @@ define([
          * @param  {Model} model модель удаляемого автомобиля
          */
         resetFavorite: function(model) {
-            app.store.resetFavorite(model);
-            app.collections.favorites.remove(model);
+            this._app.store.resetFavorite(model);
+            this._app.collections.favorites.remove(model);
         },
 
         // собственные события представления
@@ -125,7 +127,7 @@ define([
                     $this.toggle($this.hasClass(spp_class));
                 });
             }
-            navi.set("subpage", $tab.attr("name"));
+            this._navi.set("subpage", $tab.attr("name"));
         },
 
         /**
@@ -138,9 +140,9 @@ define([
             this.$brands.toggleClass("selected", false);
             $tab.toggleClass("selected", true);
             // сигнал о смене брэнда для коллекций
-            app.collections.catalog.meta("brand", brand);
-            app.collections.favorites.meta("brand", brand);
-            navi.set("brand", brand);
+            this._app.collections.catalog.meta("brand", brand);
+            this._app.collections.favorites.meta("brand", brand);
+            this._navi.set("brand", brand);
         },
 
         /**

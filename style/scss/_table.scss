@@ -28,6 +28,7 @@
                     position: absolute;
                     padding: 4px;
                     border-radius: 2px;
+                    background-color: $color_bgwhite;
                     @include box-border($color_border, 2px, 8px);
                     min-height: 240px;
                     min-width: 320px;

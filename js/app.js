@@ -40,6 +40,8 @@ define([
             // инициализация модели хранимых на клиенте данных
             this.store = new StoreModel({
                 brands: brands
+            }, {
+                itemName: "bAutoLS"
             });
 
             // пометить в каталоге автомобили, выбранные на этом клиенте
@@ -58,9 +60,8 @@ define([
             })));
 
             // инициализация представления приложения
-            this.views.app = new AppView(this);
+            this.views.app = new AppView({ app: this });
             this.views.app.render();
-
         }
         else {
             return new AppConstructor();

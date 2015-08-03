@@ -13,9 +13,55 @@ define([
 
 ], function(template, CarView) {
 
-    // дискриптор таймера и флаг для всплывающей подсказки
-    var tooltip_timer = null,
-        tooltip_hidden = true;
+    /**
+     * Функция-конструктор обработчика всплывающей подсказки
+     * для отображения полного изображения по превью в таблицах
+     * @param {jQuery} $container контейнер подсказки
+     * @param {object} options настройки
+     */
+    function TooltipImage($container, options) {
+        // настройки по умолчанию
+        options = _.extend({
+            /** @type {number:integer} ожидание (мс) */
+            waiting: 500,
+            /** @type {number:integer} время анимации (мс) */
+            aspeed: 200,
+            /** @type {string} используемый атрибут для получения пути к изображению */
+            img_src_attr: "data-img",
+            /** @type {string} селектор изображения в контейнере */
+            img_selector: "img"
+        }, options);
+
+        /** @type {jQuery} элемент изображения в контейнере */
+        var $image = $container.find(options.img_selector);
+
+        // дискриптор таймера и флаг состояния
+        var timer = null,
+            isHidden = true;
+
+        /**
+         * Открыть подсказку
+         * @param  {jQuery} $target целевой элемент
+         */
+        this.show = function($target) {
+            timer = setTimeout(function() {
+                isHidden = false;
+                $image.attr("src", $target.attr(options.img_src_attr));
+                $container.appendTo($target.parent()).fadeIn(options.aspeed);
+            }, options.waiting);
+        };
+
+        /**
+         * Закрыть подсказку
+         */
+        this.hide = function() {
+            clearTimeout(timer);
+            if (!isHidden) {
+                isHidden = true;
+                $container.fadeOut(options.aspeed);
+            }
+        };
+    }
 
     // Абстрактный класс представления таблицы
     var TableView = Backbone.View.extend({
@@ -30,7 +76,8 @@ define([
             this.$el.html(this.template());
             this.$tbody = this.$el.find("tbody");
             this.$amount = this.$el.find(".table_amount");
-            this.$imgtt = this.$el.find(".td_image_tt");
+            /** @type {TooltipImage} обработчик всплывающей подсказки */
+            this._ttimg = new TooltipImage(this.$el.find(".td_image_tt"));
             // рендеринг с учетом брэнда
             this.renderFiltered(this.collection.meta("brand"));
             return this;
@@ -64,14 +111,7 @@ define([
          */
         imageShow: function(e) {
             e.preventDefault();
-            var self = this;
-            tooltip_timer = setTimeout(function() {
-                tooltip_hidden = false;
-                var $target = $(e.currentTarget),
-                    img_src = $target.attr("data-img");
-                self.$imgtt.find("img").attr("src", img_src);
-                self.$imgtt.appendTo($target.parent()).fadeIn(200);
-            }, 500);
+            this._ttimg.show($(e.currentTarget));
         },
 
         /**
@@ -80,11 +120,7 @@ define([
          */
         imageHide: function(e) {
             e.preventDefault();
-            clearTimeout(tooltip_timer);
-            if (!tooltip_hidden) {
-                tooltip_hidden = true;
-                this.$imgtt.fadeOut(200);
-            }
+            this._ttimg.hide();
         },
 
         /**

@@ -14,16 +14,46 @@
  */
 define(function() {
 
-    var storage = function() {
-        /** @type {string} используемая переменная */
-        var use_name = "bAutoLS";
+    /**
+     * @class Базовый класс использования LocalStorage
+     * @description Немного нативного js-кода вместо моделей =)
+     * @param {string} itemName используемое имя
+     * @param {function} cbDefault колбэк значений по умолчанию
+     */
+    function Storage(itemName, cbDefault) {
+        this._item = itemName;
+        this._cbDefault = cbDefault;
+    }
 
-        /**
-         * Инициализация данных по умолчанию
-         * @param  {array} brands доступные бренды
-         * @return {object} данные как объект (по умолчанию)
-         */
-        function getDefault(brands) {
+    /**
+     * Загрузить данные из локального хранилища
+     * @return {object} данные как объект
+     */
+    Storage.prototype.load = function() {
+        var data = localStorage.getItem(this._item);
+        if (data !== null) {
+            return JSON.parse(data);
+        }
+        if (typeof this._cbDefault === "function") {
+            return this._cbDefault.apply(this, arguments);
+        }
+        return null;
+    };
+
+    /**
+     * Сохранить дынные в локальное хранилище
+     * @param  {object} data данные как объект
+     */
+    Storage.prototype.save = function(data) {
+        localStorage.setItem(this._item, JSON.stringify(data));
+    };
+
+    /**
+     * @class Дочерний класс, используемый модулем
+     * @param {string} itemName используемое имя
+     */
+    function StorageBrands(itemName) {
+        StorageBrands.superclass.constructor.call(this, itemName, function(brands) {
             var statistics = {};
             brands.forEach(function(currentBrand) {
                 statistics[currentBrand.value] = 0;
@@ -34,39 +64,25 @@ define(function() {
                 /** @type {object} статистика по брендам */
                 statistics: statistics
             };
-        }
+        });
+    }
+    StorageBrands.prototype = Object.create(Storage.prototype);
+    StorageBrands.prototype.constructor = StorageBrands;
+    StorageBrands.superclass = Storage.prototype;
 
-        return {
-            /**
-             * Загрузить данные из локального хранилища
-             * @param  {array} brands доступные бренды
-             * @return {object} данные как объект
-             */
-            load: function(brands) {
-                var data = localStorage.getItem(use_name);
-                return data !== null ? JSON.parse(data) : getDefault(brands);
-            },
-            /**
-             * Сохранить дынные в локальное хранилище
-             * @param  {object} data данные как объект
-             */
-            save: function(data) {
-                localStorage.setItem(use_name, JSON.stringify(data));
-            }
-        }
-    }();
 
     return Backbone.Model.extend({
-
-        initialize: function(attributes) {
-            // attributes.brands - используемые брэнды
-            var data = storage.load(attributes.brands);
+        initialize: function(attributes, options) {
+            /** @type {StorageBrands} используемое хранилище */
+            this._storage = new StorageBrands(options.itemName);
+            // инициализация (load)
+            var data = this._storage.load(attributes.brands);
             this.set("choiced", data.choiced);
             this.set("statistics", data.statistics);
         },
 
         save: function() {
-            storage.save({
+            this._storage.save({
                 choiced: this.get("choiced"),
                 statistics: this.get("statistics")
             });
