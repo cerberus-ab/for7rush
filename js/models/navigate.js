@@ -8,6 +8,7 @@
  *
  * @param  {string} subpage открытая вкладка
  * @param  {string} brand используемый брэнд
+ *
  */
 define(function() {
 

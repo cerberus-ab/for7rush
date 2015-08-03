@@ -1,8 +1,18 @@
+/**
+ * @module Представление приложения
+ *
+ * @description
+ * Главный файл представления;
+ * имеет дочерние представления для коллекций и статистики;
+ * описывает основную бизнес-логику приложения;
+ * имеет ссылку на экземпляр приложения.
+ *
+ */
 define([
-    "text!templates/app.html",
-    "models/navigate",
-    "views/table",
-    "views/statistics"
+    "text!templates/app.html",  // шаблон представления
+    "models/navigate",          // модель элемента навигации
+    "views/table",              // представление таблицы для коллекций
+    "views/statistics"          // представление статистики
 
 ], function(template, AppViewNavigateModel, TableView, StatiscticsView) {
 
@@ -47,8 +57,7 @@ define([
             // сохранить ссылки на используемые элементы
             this.$insets = this.$el.find("#navigate .inset");
             this.$subpages = this.$el.find("#content .subpage");
-            this.$fbrand = this.$el.find("#filter_brand");
-            this.$brands = this.$fbrand.find(".tab");
+            this.$brands = this.$el.find("#filter_brand .tab");
             // таблицы автомобилей и избранного как дочерние представления
             this.childs.catalog = new TableView.Catalog({
                 collection: app.collections.catalog,
@@ -164,7 +173,7 @@ define([
 
         /**
          * Открыть брэнд по имени
-         * @param  {string} brand название брэнда
+         * @param  {string} name название брэнда
          */
         openBrandByName: function(name) {
             var $brand = this.$brands.filter("[data-brand='" + name + "']");

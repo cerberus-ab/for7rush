@@ -1,0 +1,93 @@
+@mixin collection_table($picsize) {
+    @include box-border($color_border, 2px, 2px);
+    @include background($path_img + $path_bg);
+    cursor: default;
+    .table_header {
+        height: 24px;
+        background-color: $color_bgdark;
+        padding-left: 5px;
+        p {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+    .table_content {
+        table {
+            tr {
+                .td_image {
+                    width: $picsize;
+                    height: $picsize;
+                    display: inline-block;
+                    background-size: cover;
+                    background-color: $color_bgwhite;
+                    @include box-border($color_border, 2px, 2px);
+                }
+                .td_image_tt {
+                    top: 20px;
+                    left: $picsize + 70px;
+                    position: absolute;
+                    padding: 4px;
+                    border-radius: 2px;
+                    @include box-border($color_border, 2px, 8px);
+                    min-height: 240px;
+                    min-width: 320px;
+                }
+                min-height: 20px;
+                td {
+                    padding: 2px 4px 4px 4px;
+                    vertical-align: top;
+                    text-align: left;
+                    &:first-child {
+                        border-right: 1px solid $color_bgdark;
+                        width: $picsize + 50px;
+                        position: relative;
+                    }
+                    &:nth-child(2) {
+                        width: 200px;
+                    }
+                    &:nth-child(4) {
+                        width: 150px;
+                    }
+                }
+                &:not(:last-child) {
+                    td {
+                        border-bottom: 1px solid $color_bgdark;
+                    }
+                }
+            }
+            thead {
+                background-color: $color_bglight;
+                tr {
+                    height: 24px;
+                    td {
+                        vertical-align: middle;
+                        border-top: 1px solid $color_bgwhite;
+                        border-right: 1px solid $color_bgwhite;
+                        text-shadow: 0 1px 1px $color_bgwhite;
+                        &:first-child {
+                            border-right: 1px solid $color_bgwhite;
+                            border-left: 1px solid $color_bgwhite;
+                        }
+                    }
+                }
+            }
+            tbody {
+                tr:hover {
+                    background-color: $color_bgwhite;
+                }
+                tr {
+                    td:first-child {
+                        padding: 2px;
+                    }
+                    td:nth-child(4) {
+                        padding-top: 8px;
+                        padding-bottom: 8px;
+                    }
+                    td:first-child, td:nth-child(4) {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}

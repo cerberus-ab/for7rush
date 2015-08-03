@@ -1,3 +1,15 @@
+/**
+ * @module Каталог автомобилей
+ *
+ * @arrayof
+ * @param  {integer} cid идентификатор
+ * @param  {string} name название автомобиля
+ * @param  {string} brand брэнд
+ * @param  {string|null} desc описание автомобиля
+ * @param  {string} img путь к изображению
+ * @param  {string|null} img_preview путь к превью изображения
+ *
+ */
 define(function() {
     var img_root = "img/cars/full/",
         img_preview_root = "img/cars/preview/";

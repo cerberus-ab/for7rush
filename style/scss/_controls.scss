@@ -1,0 +1,59 @@
+@mixin tab_basic($min-width, $height) {
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    outline: none;
+    display: block;
+    float: left;
+    color: $font_color;
+    background-color: $color_bgwhite;
+    text-shadow: 0 1px 1px $color_bgwhite;
+    min-width: $min-width;
+    height: $height;
+    &:not(:last-child) {
+        border-right: 1px solid $color_border;
+    }
+    &:not(.selected):hover {
+        background-color: $color_bglight;
+    }
+    &.selected {
+        background-color: $color_bgdark;
+    }
+}
+
+@mixin tabs_menu() {
+    float: left;
+    @include box-border($color_border, 2px, 2px);
+    a.tab {
+        @include tab_basic(32px, 16px);
+        padding: 4px 8px;
+    }
+}
+
+@mixin insets_menu() {
+    float: left;
+    border: 1px solid $color_border;
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+    a.inset {
+        @include tab_basic(32px, 16px);
+        padding: 4px 8px 8px 8px;
+    }
+}
+
+@mixin button() {
+    @include box-border($color_border, 2px, null);
+    background-color: $color_bgwhite;
+    cursor: pointer;
+    text-shadow: 0 1px 1px $color_bgwhite;
+    height: 24px;
+    min-width: 100px;
+    &:enabled:hover {
+        background-color: $color_bglight;
+    }
+    &:disabled {
+        cursor: default;
+        color: $font_color_disabled;
+        text-shadow: none;
+    }
+}

@@ -13,13 +13,10 @@
     left: $padding;
     right: $padding;
 }
-@mixin fontsize($size) {
-    @if $size == "usual" {
-        font-size: 14px;
-        line-height: 22px;
-    }
-    @else if $size == "medium" {
-        font-size: 16px;
-        line-height: 28px;
+@mixin box-border($color, $radius, $shadow) {
+    border: 1px solid $color;
+    border-radius: $radius;
+    @if $shadow != null {
+        box-shadow: 0 0 $shadow $color;
     }
 }

@@ -1,3 +1,14 @@
+/**
+ * @module Представление статистики
+ *
+ * @description
+ * Отрисовка графика статистики выбора автомобилей;
+ * в качестве модели используются хранимые на клиенте данные.
+ *
+ * @param  {array} brands используемые брэнды
+ * @param  {object} statistics статистика по брэндам
+ *
+ */
 define(function() {
 
     return Backbone.View.extend({
