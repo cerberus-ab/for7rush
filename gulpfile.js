@@ -8,7 +8,7 @@ var gulp = require("gulp-param")(require("gulp"), process.argv),
     shell = require("gulp-shell");
 
 /**
- * @task Обработка ресурсов: сжатие изображение
+ * @task Обработка ресурсов: сжатие изображений
  */
 gulp.task("buildResources", function() {
     gulp.src("src/img/**/*")
