@@ -44,6 +44,7 @@ define([
             });
             this._app.router.on("route:openStatistics", function() {
                 self.openInsetByName("statistics");
+                self.openBrandByName(null);
             });
             // навигация
             this._navi.on("change:_url", function(model, value) {
